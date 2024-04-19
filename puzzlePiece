@@ -1,0 +1,256 @@
+package com.mycompany.jigsawpiece;
+ 
+public class JigsawPiece {
+    // initializing attributes
+    String name = ""; //name of puzzle piece
+    int side1 = 0; //left
+    int side2 = 0; //top
+    int side3 = 0; //right
+    int side4 = 0; //bottom
+ 
+    JigsawPiece (String n, int s1, int s2, int s3, int s4) { //constructor to initialize each piece
+        name = n;
+        side1 = s1;
+        side2 = s2;
+        side3 = s3;
+        side4 = s4;
+    }
+    boolean isLeftEdge() {
+        if (side1 == 0) { //checks that only the left side is a straight edge
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isTopEdge() {
+        if (side2 == 0) { //checks that only the top side is a straight edge
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isRightEdge() {
+        if (side3 == 0) { //checks that only the right side is a straight edge
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isBottomEdge() {
+        if (side4 == 0) { //checks that only the bottom side is a straight edge
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isTopLeftCorner() {
+        if ((side1 == 0) && (side2==0) && !(side3==0) && !(side4==0)) { //checks if side1 and side2 are flat
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isTopRightCorner() {
+        if ((side2 == 0) && (side3==0) && !(side1==0) && !(side4==0)) { //checks if side2 and side 3 are flat
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isBottomLeftCorner() {
+        if ((side1 == 0) && (side4==0) && !(side2==0) && !(side3==0)) { //checks if side 1 and side 4 are flat
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean isBottomRightCorner() {
+        if ((side3 == 0) && (side4==0) && !(side1==0) && !(side2==0)) { //checks if side 3 and side 4 are flat
+            return true;
+        }
+        else
+            return false;
+    }
+    boolean fits(JigsawPiece j) {
+        if ((this.side1) == (-1 * j.side3)) {
+            return true;
+        }
+        else
+            return false;
+    }
+    void print() {
+        System.out.print(name + " ");
+    }
+ 
+    public static void main(String[] args) {
+        JigsawPiece[] myArray = new JigsawPiece[20]; //trying to order this array 
+        int x = myArray.length;
+        int rowLength;
+        JigsawPiece[] ordered = new JigsawPiece[x]; //to keep the correct order of the puzzle.
+        int p = 0; // index of ordered list.
+        myArray[0] = new JigsawPiece("a", -45, 0, 0, -84);//    4 ----> end of row 1
+        myArray[1] = new JigsawPiece("c", -46, 0, 45, 19);//    3
+        myArray[2] = new JigsawPiece("d", 0, -2, 6, 13);//      5
+        myArray[3] = new JigsawPiece("e", 0, 0, 96, 2);//       1
+        myArray[4] = new JigsawPiece("f", -96, 0, 46, 15);//    2
+        myArray[5] = new JigsawPiece("g", 0, -13, 30, 23);//    9
+        myArray[6] = new JigsawPiece("h", -47, 34, 0, 0);//     8 ----> end of row 2
+        myArray[7] = new JigsawPiece("i", -9, 87, 47, 15);//    7
+        myArray[8] = new JigsawPiece("j", -6, -2, 9, 8);//      6
+        myArray[9] = new JigsawPiece("l", 17, -20, 48, 0);//   11
+        myArray[10] = new JigsawPiece("k", -30, 7, -17, 0);//  10
+        myArray[11] = new JigsawPiece("m", -48, 5, 0, 0);//      12
+        
+        myArray[12] = new JigsawPiece("n", -89, 99, 0,77);//      16
+        myArray[13] = new JigsawPiece("o", 0, -23, 79, 73);//      13
+        myArray[14] = new JigsawPiece("p", -79, 34, 21, 27);//      15
+        myArray[15] = new JigsawPiece("q", -21, 15, 89, 36);//      14
+        
+        myArray[16] = new JigsawPiece("r", -41, 6, 0, 0);//      20
+        myArray[17] = new JigsawPiece("s", 0, -73, 22, 60);//      17
+        myArray[18] = new JigsawPiece("t", -88, 35, 41, 0);//      19
+        myArray[19] = new JigsawPiece("u", -22, 15, 88, 0);//      18
+        
+        
+        
+        // e f c a 
+        // d j i h 
+        // g k l m
+        // o p q n
+        // s u t r
+ 
+        //System.out.println("There are " + myArray.length + " puzzle pieces");
+        //find top left piece
+        for (int i = 0; i<myArray.length; i++) {
+            if (myArray[i] == null) {
+                System.out.println("Puzzle piece missing.");
+                System.exit(0);
+            }
+            if (myArray[i].isTopLeftCorner()) {
+                myArray[i].print(); //prints the first piece name
+                ordered[p] = myArray[i]; //first element in ordered array -----> ordered[0]
+                break;
+            }
+        }
+        /*
+        //find piece to its right 
+        for (int i = 0; i<myArray.length; i++) {
+            if (myArray[i] == null) {
+                System.out.println("Puzzle piece missing.");
+                System.exit(0);
+            }// must be top edge and fit into side3 of first piece.
+            if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                myArray[i].print();
+                p++;
+                ordered[p] = myArray[i]; //second element in ordered array -----> ordered[1]
+                break;
+            }
+        }
+        */
+        while (!ordered[p].isTopRightCorner()) {
+            //find next piece to the right until it reaches the top right corner.
+            for (int i = 0; i<myArray.length; i++) {
+                if (myArray[i] == null) {
+                    System.out.println("Puzzle piece missing.");
+                    System.exit(0);
+                }// must be top edge and fit into side3 of first piece.
+                if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                    myArray[i].print();
+                    p++;
+                    ordered[p] = myArray[i]; //second element in ordered array -----> ordered[1]
+                    break;
+                }
+            }
+        } // if true, first line is finished.
+        System.out.println();
+        //**GOOD UNTIL HERE
+        rowLength = p+1; //how long each row is (all rows must be the same length)
+        //System.out.println("each row is " + rowLength + " pieces long");
+        int n = myArray.length / rowLength;
+        //System.out.println("There will be " + n + " more rows");
+        n--;
+        
+        
+        // for first element in second line, must fit into ordered[0].side4 with new element side2
+        for (int i = 0; i<myArray.length; i++) {
+                if (myArray[i] == null) {
+                    System.out.println("Puzzle piece missing.");
+                    System.exit(0);
+                }// must be top edge and fit into side3 of first piece.
+                if ((myArray[i].side2 == (-1*(ordered[0].side4)))) {
+                    myArray[i].print();
+                    p++;
+                    ordered[p] = myArray[i]; //second element in ordered array -----> ordered[1]
+                    break;
+                }
+        }
+        // do manual for first element (check if it fits)
+ 
+        //while the piece isnt a right edge, keep going.
+        while (!ordered[p].isRightEdge()) {
+            //find next piece to the right until it reaches the right edge piece.
+            for (int i = 0; i<myArray.length; i++) {
+                if (myArray[i] == null) {
+                    System.out.println("Puzzle piece missing.");
+                    System.exit(0);
+                }// 
+                if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                    myArray[i].print();
+                    p++;
+                    ordered[p] = myArray[i]; //second element in ordered array -----> ordered[1]
+                    break;
+                }
+            }
+        } // if true, second line is finished.
+        System.out.println();
+        //System.out.println("Second row is done");
+        n--;
+        
+        //rowLength = rowLength+1;
+        //System.out.println("There will be " + n + " more row");
+        while (n>0) {
+            //find first
+            //ordered[p-rowLength+1].print();
+            //System.out.print(p);
+            for (int i = 0; i<myArray.length; i++) {
+                if (myArray[i] == null) {
+                    System.out.println("Puzzle piece missing.");
+                    System.exit(0);
+                }// must be top edge and fit into side3 of first piece.
+                if ((myArray[i].side2 == (-1*(ordered[p-rowLength+1].side4)))) {
+                    myArray[i].print();
+                    p++;
+                    ordered[p] = myArray[i]; //second element in ordered array -----> ordered[1]
+                    break;
+                }
+            }
+        //while the piece isnt a right edge, keep going.
+        //what if it was right edge tho?
+ 
+            while (!ordered[p].isRightEdge()) {
+                //find next piece to the right until it reaches the right edge piece.
+                for (int i = 0; i<myArray.length; i++) {
+                    if (myArray[i] == null) {
+                        System.out.println("Puzzle piece missing.");
+                        System.exit(0);
+                    }// 
+                    if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                        myArray[i].print();
+                        p++;
+                        ordered[p] = myArray[i]; //second element in ordered array -----> ordered[1]
+                        break;
+                    }
+                }
+            }
+            //if (ordered[p].isRightEdge()) {
+             //   ordered[p].print();
+              //  p++;
+                //ordered[p] = myArray[i];
+            //}
+            //print ordered[p] to check if it even reaches the last piece
+            //System.out.println(ordered[p]);
+            System.out.println();
+            n--;
+        }
+    }
+}
