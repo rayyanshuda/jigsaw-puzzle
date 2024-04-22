@@ -83,10 +83,11 @@ public class JigsawPiece {
     }
  
     public static void main(String[] args) {
+        //myArray is the number of puzzle pieces (change this number to increase or decrease the length of the puzzle)
         JigsawPiece[] myArray = new JigsawPiece[20]; //trying to order this array 
         int x = myArray.length;
         int rowLength;
-        JigsawPiece[] ordered = new JigsawPiece[x]; //to keep the correct order of the puzzle.
+        JigsawPiece[] ordered = new JigsawPiece[x]; //to keep the correct order of the puzzle
         int p = 0; // index of ordered list.
 
         myArray[0] = new JigsawPiece("a", -45, 0, 0, -84);
@@ -136,7 +137,7 @@ public class JigsawPiece {
         while (!ordered[p].isTopRightCorner()) {
             // find next piece to the right until it reaches the top right corner.
             for (int i = 0; i<myArray.length; i++) {
-                if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                if ((myArray[i].fits(ordered[p]))) {
                     myArray[i].print();
                     p++;
                     ordered[p] = myArray[i]; // add the element found to the ordered array
@@ -176,11 +177,11 @@ public class JigsawPiece {
             System.exit(0);
         }
  
-        //while the piece isnt a right edge, keep going.
+        //while the piece isn't a right edge, keep going.
         while (!ordered[p].isRightEdge()) {
             //find next piece to the right until it reaches the right edge piece.
             for (int i = 0; i<myArray.length; i++) {
-                if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                if ((myArray[i].fits(ordered[p]))) {
                     myArray[i].print();
                     p++;
                     ordered[p] = myArray[i]; // add the element found to the ordered array
@@ -222,7 +223,7 @@ public class JigsawPiece {
             while (!ordered[p].isRightEdge()) {
                 //find next piece to the right until it reaches the right edge piece.
                 for (int i = 0; i<myArray.length; i++) {
-                    if ((myArray[i].side1 == (-1*(ordered[p].side3)))) {
+                    if ((myArray[i].fits(ordered[p]))) {
                         myArray[i].print();
                         p++;
                         ordered[p] = myArray[i]; // add the element found to the ordered array
