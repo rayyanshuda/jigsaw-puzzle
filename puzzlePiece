@@ -79,15 +79,15 @@ public class JigsawPiece {
             return false;
     }
     void print() {
-        System.out.print(name + " ");
+        System.out.print(name + " "); // printing attribute name of element
     }
  
     public static void main(String[] args) {
         //myArray is the number of puzzle pieces (change this number to increase or decrease the length of the puzzle)
-        JigsawPiece[] myArray = new JigsawPiece[20]; //trying to order this array 
+        JigsawPiece[] myArray = new JigsawPiece[20]; // trying to order this array 
         int x = myArray.length;
         int rowLength;
-        JigsawPiece[] ordered = new JigsawPiece[x]; //to keep the correct order of the puzzle
+        JigsawPiece[] ordered = new JigsawPiece[x]; // to keep the correct order of the puzzle
         int p = 0; // index of ordered list.
 
         myArray[0] = new JigsawPiece("a", -45, 0, 0, -84);
@@ -111,13 +111,8 @@ public class JigsawPiece {
         myArray[18] = new JigsawPiece("t", -88, 35, 41, 0);
         myArray[19] = new JigsawPiece("u", -22, 15, 88, 0);
         
-        // e f c a 
-        // d j i h 
-        // g k l m
-        // o p q n
-        // s u t r
-        
         boolean found = false;
+        
         //find top left piece
         for (int i = 0; i<myArray.length; i++) {
             if (myArray[i].isTopLeftCorner()) {
@@ -128,11 +123,13 @@ public class JigsawPiece {
                 break;
             }
         }
+        
         if (found == false) { // if no piece is found, end the program.
             System.out.println("Puzzle piece missing.");
             System.exit(0);
         }
-        found = false; 
+        
+        found = false; // reset variable for next element
         
         while (!ordered[p].isTopRightCorner()) {
             // find next piece to the right until it reaches the top right corner.
@@ -145,10 +142,12 @@ public class JigsawPiece {
                     break;
                 }
             }
+            
             if (found == false) { //check again if an element was found
                 System.out.println("Puzzle piece missing.");
                 System.exit(0);
             }
+            
             found = false;
         }
         
@@ -172,14 +171,17 @@ public class JigsawPiece {
                     break;
                 }
         }
+        
         if (found == false) { // check if an element was found
             System.out.println("Puzzle piece missing.");
             System.exit(0);
         }
+        
+        found = false;
  
         //while the piece isn't a right edge, keep going.
         while (!ordered[p].isRightEdge()) {
-            //find next piece to the right until it reaches the right edge piece.
+            // find next piece to the right until it reaches the right edge piece.
             for (int i = 0; i<myArray.length; i++) {
                 if ((myArray[i].fits(ordered[p]))) {
                     myArray[i].print();
@@ -189,10 +191,12 @@ public class JigsawPiece {
                     break;
                 }
             }
+            
             if (found == false) { //check if a sufficient piece was found
                 System.out.println("Puzzle piece missing.");
                 System.exit(0);
             }
+            
             found = false;
             
         }
@@ -215,13 +219,16 @@ public class JigsawPiece {
                     break;
                 }
             }
+            
             if (found == false) { // check if the piece was found
                 System.out.println("Puzzle piece missing.");
                 System.exit(0);
             }
+            
+            found = false;
  
             while (!ordered[p].isRightEdge()) {
-                //find next piece to the right until it reaches the right edge piece.
+                // find next piece to the right until it reaches the right edge piece.
                 for (int i = 0; i<myArray.length; i++) {
                     if ((myArray[i].fits(ordered[p]))) {
                         myArray[i].print();
@@ -231,10 +238,12 @@ public class JigsawPiece {
                         break;
                     }
                 }
+                
                 if (found == false) { // check if the piece was found
                     System.out.println("Puzzle piece missing.");
                     System.exit(0);
                 }
+                
                 found = false;
             }
 
