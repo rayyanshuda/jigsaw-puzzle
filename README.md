@@ -10,3 +10,5 @@ all of which are integers representing the four sides of the jigsaw puzzle as in
 
 This program assumes an array of type jigsawpiece with a number of pieces in random order. 
 Writen is a program that solves this puzzle. To solve it, the program will print the name attribute of the pieces in order from top left to bottom right.
+
+In the case that a corresponding puzzle piece is not found, the program will continue until there are no more suitable pieces to complete the puzzle, and terminate itself.
